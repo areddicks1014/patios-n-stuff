@@ -1,0 +1,377 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="my-icons.html">
+
+<link rel="lazy-import" href="tpp-home.html">
+<link rel="lazy-import" href="tpp-products.html">
+<link rel="lazy-import" href="tpp-patio-tips.html">
+<link rel="lazy-import" href="tpp-view404.html">
+
+
+<dom-module id="my-app">
+  <template>
+    <style>
+      :host {
+        --app-primary-color: #21689B;
+        --app-secondary-color: #78BDE7;
+        --app-accent-color: #F8E5BF;
+        --text-primary-color: rgba(0, 0, 0, 0.87);
+        --text-secondary-color: rgba(0, 0, 0, 0.54);
+        display: block;
+      }
+
+      [hidden] {
+        display: none; 
+      }
+
+      app-drawer-layout:not([narrow]) [drawer-toggle] {
+        display: none;
+      }
+
+      app-header {
+        color: #424242;
+        background-color: #fff;
+      }
+
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: var(--app-secondary-color);
+      }
+
+      .menu-button {
+        color: var(--app-secondary-color);
+      }
+      .logo {
+        width: auto;
+        height: 150px;
+        padding: 8px;
+      }
+      .logo-small {
+        width: auto;
+        height: 80px;
+        margin-top: 8px;
+      }
+
+      .drawer-list {
+        margin: 0 20px;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 0 16px;
+        text-decoration: none;
+        color: #000;
+        line-height: 40px;
+      }
+      .drawer-list a.text-disabled {
+        color: rgba(0, 0, 0, 0.38);
+      }
+      .drawer-list a.iron-selected {
+        color: var(--app-primary-color);
+        font-weight: bold;
+      }
+      .drawer-header {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        padding: 16px 0;
+      }
+      .drawer-header img {
+        background-size: contain;
+        width: auto;
+        height: 125px;
+        margin: auto;
+        vertical-align: center;
+      }
+      .drawer-footer {
+        position: absolute;
+        bottom: 120px;
+        background-color: var(--app-primary-color);
+        color: #fff;
+        width: 100%;
+        padding: 16px 0;
+        height: 122px;
+      }
+      .drawer-footer a {
+        color: inherit;
+        text-decoration: none;
+        font-size: 1em;
+        padding: 0 16px;
+        display: block;
+        line-height: 30px;
+      }
+      .drawer-footer .address {
+        font-size: 0.7em;
+      }
+      .top-menu {
+        background-color: var(--app-primary-color);
+        color: #fff;
+        height: 32px;
+        padding-right: 16px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .top-menu .menu-item {
+        padding: 0;
+        margin: 4px 8px;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+      .top-menu a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .top-menu a:hover {
+        text-decoration: none;
+        color: var(--app-secondary-color);
+      }
+      .top-menu paper-icon-button {
+        height: 24px;
+        width: 24px;
+        padding: 0;
+      }
+      .bottom-menu {
+        background-color: var(--app-secondary-color);
+        color: #fff;
+        height: 32px;
+        padding-right: 16px;
+        display: flex;
+        justify-content: flex-start;
+      }
+      .bottom-menu .menu-item {
+        padding: 0;
+        margin: 4px 8px;
+        font-size: 0.9em;
+      }
+      .bottom-menu a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .bottom-menu a:hover {
+        text-decoration: none;
+        color: var(--app-primary-color);
+      }
+      .bottom-menu paper-icon-button {
+        height: 24px;
+        width: 24px;
+        padding: 0;
+      }
+      .top-nav a{
+        text-decoration: none;
+        color: #000;
+        padding: 0 8px;
+      }
+      .top-nav a.text-disabled {
+        color: rgba(0, 0, 0, 0.38);
+      }
+      .top-nav a:hover {
+        color: var(--app-secondary-color);
+      }
+      .top-nav a.iron-selected{
+        font-weight: bold;
+        color: var(--app-primary-color);
+      }
+      iron-pages {
+        min-height: 83vh;
+        margin: auto;
+      }
+      .center {
+        text-align: center;
+        margin: auto;
+        vertical-align: center;
+      }
+      .text-protect {
+        text-shadow: 0 1px 0 black;
+      }
+      .text-disabled {
+        color: rgba(0, 0, 0, 0.38);
+      }
+      @media only screen and (max-width: 768px) { /* Tablet */
+        
+        .logo {
+          width: auto;
+          height: 90px;
+        }
+        .top-menu {
+          display: none;
+        }
+        .bottom-menu {
+          display: none;
+        }
+      }
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="[[rootPattern]]:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"></app-route>
+
+    <iron-media-query query="min-width: 768px" query-matches="{{wideLayout}}"></iron-media-query>
+
+    <app-drawer-layout fullbleed force-narrow>
+      <!-- Drawer content -->
+      <app-drawer id="drawer" slot="drawer" swipe-open>
+        <div class="drawer-header">
+          <img class="" src="[[importPath]]images/patios-n-stuff-logo-stacked.svg">
+        </div>
+        <div class="drawer-menu-section">
+          <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+            <a name="home" href="/home"><iron-icon icon="mdi:home"></iron-icon>&nbsp;Home</a>
+            <a name="products" href="/products"><iron-icon icon="mdi:truck"></iron-icon>&nbsp;Products</a>
+            <a name="patio-tips" href="/patio-tips"><iron-icon icon="mdi:information"></iron-icon>&nbsp;Patio Tips</a>
+          </iron-selector>
+        </div>
+        <div class="drawer-footer">
+          <a href="#" class="menu-item address"><iron-icon icon="mdi:map-marker" class="contact-icon" title="Address"></iron-icon>&nbsp;Address</a>
+          <a href="#" class="menu-item"><iron-icon icon="mdi:phone" class="contact-icon" title="Phone Number"></iron-icon>&nbsp;(555)555-5555</a>
+          <a href="#" class="menu-item"><iron-icon icon="mdi:email" class="contact-icon" title="Email"></iron-icon>&nbsp;Contact</a>
+          <a href="#" class="menu-item"><iron-icon class="contact-icon" icon="mdi:facebook-box" alt="Facebook" title="Facebook"></iron-icon>&nbsp;Find Us</a>
+        </div>
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout has-scrolling-region>
+
+        <app-header slot="header" condenses fixed effects="waterfall">
+          <div class="top-menu">
+            <a href="#" class="menu-item"><iron-icon icon="mdi:map-marker" class="contact-icon" title="Address"></iron-icon>&nbsp;Address</a>
+            <a href="#" class="menu-item"><iron-icon icon="mdi:phone" class="contact-icon" title="Phone Number"></iron-icon>&nbsp;(555)555-5555</a>
+            <a href="#" class="menu-item"><iron-icon icon="mdi:email" class="contact-icon" title="Email"></iron-icon>&nbsp;Contact</a>
+            <p class="menu-item">|</p>
+            <a href="#"class="menu-item">Find Us On&nbsp;<paper-icon-button class="fb" icon="mdi:facebook-box" alt="Facebook" title="Facebook"></paper-icon-button></a>
+          </div>
+          <app-toolbar sticky>
+            <paper-icon-button class="menu-button" icon="my-icons:menu" drawer-toggle hidden$="{{wideLayout}}"></paper-icon-button>
+            <!--<h4 main-title>[The Patio Place Logo]</h4>-->
+            <a href="/home" main-title> <img class="logo-small" src="[[importPath]]images/patios-n-stuff-logo-horizontal.svg"></img></a>
+            <iron-selector selected="[[page]]" attr-for-selected="name" class="top-nav" role="navigation" hidden$="{{!wideLayout}}">
+              <a name="home" href="/home">Home</a>
+              <a name="products" href="/products">Products</a>
+              <a name="patio-tips" href="/patio-tips">Patio Tips</a>
+            </iron-selector>
+          </app-toolbar>
+        </app-header>
+
+        <iron-pages
+            selected="[[page]]"
+            attr-for-selected="name"
+            fallback-selection="view404"
+            role="main">
+          <tpp-home name="home"></tpp-home>
+          <tpp-products name="products"></tpp-products>
+          <tpp-vendor name="vendor" route="[[subroute]]"></tpp-vendor>
+          <tpp-collection name="collection" route="[[subroute]]"></tpp-collection>
+          <tpp-patio-tips name="patio-tips"></tpp-patio-tips>
+          <tpp-view404 name="view404"></tpp-view404>
+        </iron-pages>
+        <div class="bottom-menu">
+          <a href="#" class="menu-item"><iron-icon icon="mdi:map-marker" class="contact-icon" title="Address"></iron-icon>&nbsp;Address</a>
+          <a href="#" class="menu-item"><iron-icon icon="mdi:phone" class="contact-icon" title="Phone Number"></iron-icon>&nbsp;(555)555-5555</a>
+          <a href="#" class="menu-item"><iron-icon icon="mdi:email" class="contact-icon" title="Email"></iron-icon>&nbsp;Contact</a>
+          <p class="menu-item">|</p>
+          <a href="#"class="menu-item">Find Us On&nbsp;<paper-icon-button class="fb" icon="mdi:facebook-box" alt="Facebook" title="Facebook"></paper-icon-button></a>
+        </div>
+      </app-header-layout>
+    </app-drawer-layout>
+  </template>
+
+  <script>
+    class MyApp extends Polymer.Element {
+
+      static get is() { return 'my-app'; }
+
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            reflectToAttribute: true,
+            observer: '_pageChanged',
+          },
+          rootPattern: String,
+          routeData: Object,
+          subroute: String,
+          wideLayout: {
+            type: Boolean,
+            value: false,
+            observer: 'onLayoutChange',
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)',
+        ];
+      }
+
+      constructor() {
+        super();
+
+        // Get root pattern for app-route, for more info about `rootPath` see:
+        // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
+        this.rootPattern = (new URL(this.rootPath)).pathname;
+      }
+
+      _routePageChanged(page) {
+        // Polymer 2.0 will call with `undefined` on initialization.
+        // Ignore until we are properly called with a string.
+        if (page === undefined) {
+          return;
+        }
+
+        // If no page was found in the route data, page will be an empty string.
+        // Deault to 'view1' in that case.
+        this.page = page || 'home';
+
+        // Close a non-persistent drawer when the page & route are changed.
+        if (!this.$.drawer.persistent) {
+          this.$.drawer.close();
+        }
+      }
+
+      _pageChanged(page) {
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('tpp-' + page + '.html');
+        Polymer.importHref(
+            resolvedPageUrl,
+            null,
+            this._showPage404.bind(this),
+            true);
+      }
+
+      _showPage404() {
+        this.page = 'view404';
+      }
+
+      onLayoutChange(wide) {
+        var drawer = this.$.drawer;
+        if (wide && drawer.opened) {
+          drawer.opened = false;
+        }
+      }
+    }
+
+    window.customElements.define(MyApp.is, MyApp);
+  </script>
+</dom-module>

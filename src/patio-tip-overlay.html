@@ -1,0 +1,134 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../bower_components/iron-fit-behavior/iron-fit-behavior.html">
+<link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="patio-tip-overlay">
+  <template>
+    <style include="shared-styles">
+      :host {
+        z-index: 500;
+        padding: 24px;
+        color: #424242;
+        width: 100%;
+        height: 100%;
+        background: #eee;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
+      }
+      .container {
+        position: relative;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        -webkit-transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      }
+      .top .header {
+        font-size: 40px;
+        text-transform: uppercase;
+        margin: 0 8px;
+        transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        -webkit-transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      }
+      .details {
+        margin: auto;
+        padding: 16px;
+        width: 70%;
+        overflow-y: auto;
+        transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        -webkit-transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      }
+      .details iframe {
+        width: 100%;
+        height: 60vh;
+        background: #fff;
+      }
+      .buttons {
+        float: right;
+      }
+      #btn-close {
+        float: right;
+        --paper-icon-button-ink-color: #000;
+        color: #000;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .spacer {
+        height: 128px;
+      }
+      @media only screen and (max-width: 480px) { /* Phone */
+        :host {
+          width: 100%;
+          padding: 8px;
+        }
+        .details {
+          width: 90%;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="spacer"></div>
+      <paper-icon-button id="btn-close" icon="mdi:close" on-tap="_closeOverlay"></paper-icon-button>
+      <div class="top">
+        <!--<p class="header">[[header]]</p>-->
+      </div>
+      <div class="details">
+        <slot></slot>
+      </div>
+      <div class="buttons">
+        <!--<a href="[[link]]"><paper-button>Learn More&nbsp;<iron-icon icon="icons:arrow-forward"></iron-icon></paper-button></a>-->
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class PatioTipOverlay extends Polymer.mixinBehaviors([Polymer.IronOverlayBehavior, Polymer.IronFitBehavior, Polymer.IronResizableBehavior], Polymer.Element) {
+      static get is() { return 'patio-tip-overlay'; }
+      static get properties() {
+        return {
+          header: String,
+          noCancelOnOutsideClick: {
+            type:Boolean,
+            value: true
+          }
+        }
+      }
+      _closeOverlay() {
+        this.close();
+      }
+      _submitForm() {
+        var form = this.$["patio-tip-form"];
+        form.submit();
+        if(form.validate()) {
+          this._closeOverlay();
+          form.reset();
+        }
+      }
+    }
+
+    window.customElements.define(PatioTipOverlay.is, PatioTipOverlay);
+  </script>
+</dom-module>

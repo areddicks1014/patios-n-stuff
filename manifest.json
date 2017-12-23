@@ -1,0 +1,20 @@
+{
+  "name": "Patios-N-Stuff",
+  "short_name": "Patios-N-Stuff",
+  "start_url": "./?homescreen=1",
+  "display": "standalone",
+  "theme_color": "#78BDE7",
+  "background_color": "#F8E5BF",
+  "icons": [
+    {
+      "src": "images/manifest/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/manifest/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

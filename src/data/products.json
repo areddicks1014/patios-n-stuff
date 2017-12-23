@@ -1,0 +1,35 @@
+{
+    "products": {
+        "benches": [
+            {"name":"Bench3", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/bench3.jpg"},
+            {"name":"Glider6", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/glider6.jpg"},
+            {"name":"Glider5", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/glider5.jpg"},
+            {"name":"Glider2", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/glider2.jpg"},
+            {"name":"Glider1", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/glider1.jpg"},
+            {"name":"Table6", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/table6.jpg"}
+        ],
+        "chairs": [
+            {"name":"Chair11", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chair11.jpg"},
+            {"name":"Chair8", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chair8.jpg"},
+            {"name":"ChaiseLounges4", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chaiselounges4.jpg"},
+            {"name":"Chaise3", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/ImageGen3.jpg"},
+            {"name":"ChaiseLounges3", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chaiselounges3.jpg"},
+            {"name":"Chaise4", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/ImageGen4.jpg"},
+            {"name":"ChaiseLounges2", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chaiselounges2.jpg"},
+            {"name":"Chaise1", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/ImageGen1.jpg"},
+            {"name":"Chair21", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chair21.jpg"}
+        ],
+        "dining": [
+            {"name":"Table1", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/table1.jpg"},
+            {"name":"Dining8", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/ImageGen8.jpg"},
+            {"name":"Chair4", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chair4.jpg"},
+            {"name":"DiningSet4", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/diningset4.jpg"},
+            {"name":"Chair3", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chair3.jpg"},
+            {"name":"DiningSet2", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/diningset2.jpg"},
+            {"name":"Chair21", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chair21.jpg"},
+            {"name":"Chair6", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/chair6.jpg"},
+            {"name":"Table3", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/table3.jpg"},
+            {"name":"Dining", "image":"https://s3.us-east-2.amazonaws.com/patio-place-product-images/Nikko-01.jpg"}
+        ]
+    }
+}

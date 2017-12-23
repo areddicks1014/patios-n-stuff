@@ -1,0 +1,64 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="image-banner">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        transform: translate3d(0, 0, 0);
+        width: 100%;
+        transition: opacity 0.3s ease-in-out;
+        /*background: linear-gradient(to bottom,rgba(0, 0, 0, [[opacity]]),rgba(0, 0, 0, [[opacity]])), 
+        #eee url([[url]]) no-repeat center center;*/
+      }
+      .container {
+        position: relative;
+      }
+      .container img {
+        width: 100%;
+        height: auto;
+      }
+      .container .promo-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+      }
+    </style>
+
+    <div class="container">
+      <img src="[[url]]"></img>
+      <div class="promo-area">
+        <slot>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class ImageBanner extends Polymer.Element {
+      static get is() { return 'image-banner'; }
+      static get properties() {
+        return {
+          url: String
+        }
+      }
+    }
+
+    window.customElements.define(ImageBanner.is, ImageBanner);
+  </script>
+</dom-module>

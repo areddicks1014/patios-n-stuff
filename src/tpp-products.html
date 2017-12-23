@@ -1,0 +1,69 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="tpp-product-list-item.html">
+<link rel="import" href="tpp-vendor.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="tpp-products">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+        color: #424242;
+      }
+      
+      .policy {
+        font-size: 0.8em;
+      }
+      @media only screen and (max-width: 768px) { /* Tablet */
+        
+      }
+      @media only screen and (max-width: 480px) { /* Phone */ 
+        
+      }
+    </style>
+
+    <iron-ajax id="ajax" url="../src/data/products-new.json" handle-as="json" last-response="{{ajaxResponse}}" on-response="_handleResponse" auto></iron-ajax>
+    
+    <template is="dom-repeat" items="{{ajaxResponse}}" as="vendor">
+      <a href$="/vendor/[[vendor.name]]" on-tap="_sendVendor">
+        <tpp-product-list-item vendor="{{vendor}}"></tpp-product-list-item>
+      </a>
+      <!--<tpp-vendor name="{{vendor.name}}" route="[[subroute]]" vendor="{{vendor}}"></tpp-vendor>-->
+    </template>
+    
+    <!--<array-selector id="selector" items="{{ajaxResponse}}" selected="{{selected}}"></array-selector>
+
+    <iron-pages id="product-pages" selected="{{selected}}" attr-for-selected="name">
+      <template is="dom-repeat" items="{{ajaxResponse}}" as="vendor">
+          <tpp-vendor name="{{vendor.name}}" route="[[subroute]]" vendor="{{vendor}}"></tpp-vendor>
+      </template>
+    </iron-pages>-->
+    <div class="center policy">
+      <p>The Patio Place reserves the right to change or omit prices as well as items. Displayed items may become discontinued or have a change in price. These items and prices are not guaranteed and can change at any time.</p>
+    </div>
+  </template>
+
+  <script>
+    class TppProducts extends Polymer.Element {
+      static get is() { return 'tpp-products'; }
+    }
+
+    window.customElements.define(TppProducts.is, TppProducts);
+  </script>
+</dom-module>

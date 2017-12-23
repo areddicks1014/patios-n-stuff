@@ -1,0 +1,170 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="patio-tip-item.html">
+<link rel="import" href="patio-tip-overlay.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="tpp-patio-tips">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      .list {
+        margin-top: 8px;
+      }
+      patio-tip-overlay {
+        overflow-y: auto;
+      }
+    </style>
+
+    <div class="list">
+      <patio-tip-item first on-click="_showTipOneOverlay" text="Make Your Outdoor Patio or Deck Comfortable and Stylish with the Right Furnishing Choices"></patio-tip-item>
+      <patio-tip-item on-click="_showTipTwoOverlay" text="Materials Used In Modern Outdoor Patio Furniture"></patio-tip-item>
+      <patio-tip-item on-click="_showTipThreeOverlay" text="Outdoor Wicker Furniture"></patio-tip-item>
+      <patio-tip-item on-click="_showTipFourOverlay" text="Tips On Updating Your Patio Furniture"></patio-tip-item>
+      <patio-tip-item on-click="_showTipFiveOverlay" text="Cleaning and Maintenance Tips for Patio Furniture"></patio-tip-item>
+      <patio-tip-item on-click="_showTipSixOverlay" text="Customizing Your Outdoor Living Area"></patio-tip-item>
+      <patio-tip-item on-click="_showTipSevenOverlay" text="Extend Your Living Space with an Updated Outdoor Room"></patio-tip-item>
+      <patio-tip-item last on-click="_showTipEightOverlay" text="The Patio Place: The Lowcountry's Finest"></patio-tip-item>
+    </div>
+    <patio-tip-overlay id="tip-one-overlay">
+      <h2>Make Your Outdoor Patio or Deck Comfortable and Stylish with the Right Furnishing Choices</h2>
+      <h3>Homes and Interiors</h3>
+      <p>It's springtime! There's nothing Southerners enjoy more than spending time in the great outdoors. Because of this, patios, decks, and porches are often transformed into exterior rooms with comfortable, practical furnishings. So whether you're dusting off your old porch furniture or shopping for something new, now's a great time to get your outdoor room ready for the glorious months to come.</p>
+      <h3>Helpful Advice</h3>
+      <p>As you are shopping for outdoor patio furniture, here some important facts that you should keep in mind.</p>
+      <ul>
+        <li>
+          <h4>Function:</h4>
+          <p>Consider the practical uses of an intended furniture piece, along with your space requirements. For instance, is there room for a conversation seating area? Will you need a patio table and chairs for dining? Or do you have just the right amount of room for a Chaise Lounge and potted plants? Could your outdoor patio space serve more than one purpose, providing a place for entertainment as well as a solitary retreat? Would the furniture be a permanent fixture, or should you consider lighter weight options for flexibility, storage, and easier movement?</p>
+        </li>
+        <li>
+          <h4>Design:</h4>
+          <p>Quality design and craftsmanship continue to characterize the diverse outdoor patio furniture choices available. You can find simple or ornate options that blend well with historic, rustic, or contemporary settings from the timelessness of wrought iron to the charm of wicker, from the sturdiness of teak to the lightweight durability of aluminum and polywood materials.</p>
+        </li>
+        <li>
+          <h4>Materials:</h4>
+          <p>Yes, beauty counts, but from a practical standpoint, you need outdoor furnishings built to withstand heavy wear and tear. From the foundation to the frame to the decorative cushions, the best choices are weather resistant or weather friendly. Outdoor furniture pieces made of strong materials with long-lasting finishes are best, including hardwoods, wrought iron, aluminum, and all weather wicker.</p>
+        </li>
+        <li>
+          <h4>Finishes:</h4>
+          <p>Many finishes-including oil-based paints (best because they work to repel water), lead patina, and powder-coated treatments-provide a beautiful presentation and varying degrees of protection from the elements.</p>
+        </li>
+        <li>
+          <h4>Weight:</h4>
+          <p>Consider whether the furniture will be permanently placed in a specific location or continuously moved and adjusted. The weight of a piece makes all the difference. When choosing a patio chair, for example, be sure to sit in it for a while and, if possible, pick it up to see how heavy it is. Dining chairs and other outdoor furniture that will likely be moved regularly should be solid but not too heavy.</p>
+        </li>
+        <li>
+          <h4>Fabric:</h4>
+          <p>Decorative cushions and pillows may have the appearance of heavy canvas, but they should be fashioned from vinyl or acrylic fabric that dries quickly and resists mildew. Even the most water-resistant fabrics will break down when they sit outside for too long without use. No matter which fabric you choose, store cushions in a dry place if your patio or deck will not be used for some time.</p>
+        </li>
+      </ul>
+    </patio-tip-overlay>
+    <patio-tip-overlay id="tip-two-overlay">
+      <h2>Materials Used In Modern Outdoor Patio Furniture</h2>
+      <p>In the 21st century, outdoor patio furniture has become rather sophisticated. The variety of materials used now is endless. Do you want outdoor patio furniture made of bamboo or of teak? Perhaps you might wish for a more natural look. Woods that fill this bill include cedar, redwood, and maple. Or, in a flight of whimsy, you may like to experiment with your outdoor patio furniture, using some very less known woods such as balau, ipe, jarre, or kempas which are known for their resistance to warping and rot, are fairly hard, and have a fine grain as well. All of a sudden your backyard is no longer mundane but filled with all sorts of textural and visual delights brought on by your choice of outdoor patio furniture.</p>
+      <p>How about metal-based outdoor patio furniture? At one time, metal chairs were made of aluminum and that was your only choice. Now, not only is basic aluminum used for outdoor patio furniture but it is available in extruded, cast, and wrought forms. Aluminum is such a popular metal because of its exaggerated lightness, and is so strong it is used in the construction of jets, as well as being corrosion resistant and durable. Wrought iron is another popular material for outdoor patio furniture. It is lovely to look at due to its intricate filigree work but it is rather horrendous to lift because of its tremendous weight. Once a piece of wrought iron furniture has been set in its place in your yard, it would be wise to plan upon leaving it there permanently unless there are mitigating circumstances.</p>
+      <p>The last major group of materials that might be of interest in the construction of outdoor patio furniture is truly miscellaneous. It is here that the design of your outdoor patio furniture is only limited by your dreams. Plastic or vinyl will give a casual look, decidedly appropriate for use around one's swimming pool. Plastic or vinyl offer a casual look, beanbag chairs can also be a lot of fun, wicker is slightly more formal but all of these make great modern outdoor furniture materials.</p>
+    </patio-tip-overlay>
+    <patio-tip-overlay id="tip-three-overlay">
+      <h2>Outdoor Wicker Furniture</h2>
+      <p>Wicker furniture is made from thin, slender branches woven around a frame to create variously shaped items. The wicker itself can be made from any number of materials including willow, bamboo, rattan, reed, or synthetic materials. Its soft feel is a rarity for outdoor furniture options. Wickerwork doesn't require the same level of skill as, say, fashioning wrought iron, but it does involve intricate craftsmanship. Basic wicker furniture isn't that hard to create, but the best pieces out there can only be made by experienced wickerwork artisans.</p>
+      <h3>The Appeal of Outdoor Wicker Furniture</h3>
+      <p>Outdoor wicker furniture has a lot of things going for it. It's lightweight but sturdy, creating durable but easily moved outdoor furniture. It's also considerably cheaper than either metal or wood furniture. Of course, you could always go with plastic, but plastic lacks aesthetic appeal. Outdoor wicker furniture has many of the same benefits of plastic, but looks a whole lot better on your patio. And to top it all off, wicker furniture is among the most comfortable outdoor furniture there is.</p>
+      <h3>Outdoor Wicker Patio Furniture Maintenance</h3>
+      <p>Outdoor wicker patio furniture isn't going to fall apart you after its first storm, but taking good care of your furniture will increase its lifetime exponentially. By taking some or all of the following measures, you'll keep your outdoor wicker patio furniture looking like new. For basic sheltering, buy furniture covers to keep your furniture from the elements as much as possible. You could also store your outdoor wicker furniture when you're not using it, but this is an unnecessary inconvenience. Your covers should be easily removable but still keep your patio furniture relatively protected.</p>
+      <p>More than just water, excessive heat can also damage your outdoor patio furniture. Too much heat will dry your furniture out, making it brittle and easily frayed. As much as possible, place your patio furniture in the shade where you can keep it from the heat and provide a more comfortable sitting space for yourself, too.</p>
+      <p>If your outdoor wicker patio furniture does fray and crack the varnish, you'll need to recoat it. Without a sealed varnish, significant damage can come to your wicker furniture rendering it unserviceable. Plus, recoating your patio furniture will help keep it looking like new.</p>
+      <h3>Indoor Wicker Furniture</h3>
+      <p>Wicker furniture is most commonly placed outdoors, but it has its place indoors as well. Wicker storage chests and baskets can be a great idea for your bathroom, for example. Also for inexpensive and pleasing furniture in kids' rooms, wicker furniture is the perfect blend of style and usability. You don't have to go with the traditional look of wicker furniture, either. It can be painted to match the decoration in your kid's bedroom. Be it storage chests or miniature furniture, most homeowners find some use for indoor wicker furniture. Naturally, indoor wicker furniture requires considerably less maintenance than its outdoor counterpart, but it'll still need the occasional dusting.</p>
+    </patio-tip-overlay>
+    <patio-tip-overlay id="tip-four-overlay">
+      <h2>Tips On Updating Your Patio Furniture</h2>
+      <p>It is true that outdoor patio furniture is meant to last a while, but if your patio chairs are rusted and corroded and if your backyard table has been around for more than twenty years then that's crossing the line. Your friends are starting to avoid your get-togethers because they don't want to sit on those hazardous seats. Maybe it's time you looked into upgrading your outdoor patio furniture, for everyone's sake.</p>
+      <p>If you're unsure of what kind of outdoor patio furniture to invest in, there are plenty of options available. The basics begin with wood outdoor patio furniture made from cherry or white cedar. These woods will need to be varnished every couple of years, as well as stored safely during the winter months. They are somewhat weather-resistant, but do need some upkeep on a regular basis. However, these beautiful woods will last longer than the metal deathtrap you probably call a patio table. For that rustic quality without the rust, redwood, pine and white cedar outdoor patio furniture are the right choice.</p>
+      <p>Poly-wood is another viable option that doesn't require that much maintenance and is easy to clean; it's a perfect choice for those summertime picnics in the backyard. What's so amazing about poly-wood is that it's practically weather-proof, and constructed from post-consumer recycled plastics. That's right all the materials used in poly-wood come from your recycled water bottles so while buying outdoor patio furniture you'll also be helping the environment.</p>
+      <p>For those that want to start fresh by serving up burgers on a truly great outdoor patio furniture set, go for teak. Teak is found in Southeast Asia and Indonesia and has some fantastic renewable properties. Many teak outdoor patio furniture sets are sustainably harvested, meaning that they are harvested in an eco-friendly manner. Teak outdoor patio furniture resists the elements and needs little or no maintenance, and ages beautifully from a fine wood into a silver-gray color.</p>
+    </patio-tip-overlay>
+    <patio-tip-overlay id="tip-five-overlay">
+      <h2>Cleaning and Maintenance Tips for Patio Furniture</h2>
+      <p>Our product is made of HDPE plastic resin that has been purified and UV protected. It is generally cared for and cleaned with soap and warm water. For certain stains and additional cleaning power, a 1/3 bleach and 2/3 water solution can be used without affecting the color of your polywood furniture. Also, a popular method of cleaning outdoor furniture is a high-pressure power wash, not to exceed 1,500 PSI, which is the equivalent of a car wash. The surface characteristics of the outdoor patio furniture may require the use of a soft bristle brush to get into the creases.</p>
+      <p>The hardware used in the assembly and construction of outdoor resin wicker furniture is a 300 series commercial grade stainless steel that has an additional “Xylan” protective and cosmetic coating. Although the quality of the hardware has a high level of corrosive resistance, the hardware can show some signs of corrosion in salt air environments. A practical solution to these signs of corrosion would be to wash the product with soap and warm water. Use a soft bristle brush to scrub the corroding areas of the furniture. Also, use appliance touch up paint in the appropriate color to protect the integrity of your outdoor patio set. Appliance touch up paint can be purchased at local hardware stores. Taking these simple but crucial steps to maintaining the beauty of your outdoor patio furniture set will ensure your continued enjoyment for years to come.</p>
+    </patio-tip-overlay>
+    <patio-tip-overlay id="tip-six-overlay">
+      <h2>Customizing Your Outdoor Living Area</h2>
+      <p>Outdoor decks are an outdoor living component that are becoming more customized than ever before, allowing for built-in amenities such as fire pits, custom built outdoor kitchens and other cooking environments. Low-maintenance materials are more popular than ever before, with composite wood decking being the most popular choice in deck-building material.</p>
+      <p>When planning an outdoor living space or patio, the most important factor to keep in mind is the view and the atmosphere where you’ll create the space. Pick the place in your outdoor space that you naturally gravitate toward when you go outdoors, whether it is the grill area or your dock on the water, and that will dictate where you start. The only difference is, instead of walls separating the space, the outdoors landscapes and features as well as the open air take center stage.</p>
+      <p>No matter how comfortable and lavish an outdoor living space may be, the key is using materials that are practical and easy to maintain in the Lowcountry’s humidity and saltwater air. Durable materials such as teak and powder-coated metals work well outdoors along the coast, as do the new synthetic wickers and outdoor fabrics that won’t show wear and work well with a traditional aesthetic. Most often, the most low-maintenance materials are also the most comfortable. Woven mesh that allows you to breathe is also very easy to keep clean and doesn’t require cushion storage. Cushioned furniture is best left to sunrooms and covered cabanas.</p>
+      <p>Simplified prints, cabana strips and solid colored upholstery with contrasting trims all point to an interest in simplified luxury and a spa aesthetic with vivid, bold colors that are big this year. Just as the color yellow is making a splash in fashion this year, it’s also being brought into outdoor living spaces.</p>
+      <p>Outdoor living isn’t just for the rich and famous, and people who love the outdoors are taking it to the next step and planning outdoor patio spaces. The marriage of an outdoor living space with a home’s interior has become a main-stay in home design. Summers will be more special spent outdoors with comfortable and functional living spaces you’l l want to use everyday.</p>
+    </patio-tip-overlay>
+    <patio-tip-overlay id="tip-seven-overlay">
+      <h2>Extend Your Living Space with an Updated Outdoor Room</h2>
+      <p>Southerners are known to savor summer days outside in the fresh air, and there’s no better way to enjoy the season than to extend your living space outdoors. Whether it’s entertaining friends at a casual dinner party or simply relaxing poolside with a good book, being outdoors can make everyday living feel as relaxed and special as a luxury vacation.</p>
+      <p>Creating beautiful outdoor rooms that are extensions of a home’s interior space has become more and more popular along the Southeast coast, where we live and play outdoors almost 10 months out of the year. In fact, outdoor living has become so popular that many homeowners are starting to spend just as much time planning their outdoor rooms as they spend planning the interiors of their homes. Instead of the typical outdoor table and chairs placed on the patio next to the pool, homeowners are bringing all the luxury comforts of indoor living outside.</p>
+      <p>Not only are these outdoor living rooms becomes extensions, but they are becoming as functional as the interior rooms of a home. Distinct outdoor living rooms, dining rooms and poolside lounge rooms are furnished accordingly with luxury design details and high-quality fabrics that give the look and feel of permanent rooms.</p>
+      <p>“Traditionally dining sets were the main purchases for the outdoor living space,” said Barbara Hughes of The Patio Place in Savannah. “Within the past three years, we have seen this change to conversational areas and living room settings. Deep seating is the way consumers are going, and they are definitely going for more color than before.”</p>
+      <p>Accessorizing is also a big design trend in outdoor living, and you can make the outdoor patio space unique by decorating and accessorizing just as you would an interior room of the house. Pillows, rugs, rolling bar carts, dinnerware, linens and lanterns are other common accessories that add individual style as well as functionality to each outdoor space, creating the feeling of a real room. A vintage chandelier suspended from a tree branch or roof cover above turns an outdoor meal into an occasion.</p>
+      <p>You can create an outdoor patio space that’s simply charming or elaborately elegant with all the latest technology. All it takes is a little imagination and inspiration – and the outdoor possibilities are limitless.</p>
+    </patio-tip-overlay>
+    <patio-tip-overlay id="tip-eight-overlay">
+      <h2>The Patio Place: The Lowcountry's Finest</h2>
+      <p>The Patio Place was started five years ago with the intentions of offering high  quality outdoor furniture that would last decades. With more focus on outdoor living in today's society, the industry has amped up its choices for the customer. From fabrics to styles, there is usre to be something for everyone.</p>
+      <p>Barbara Hughes, has been in the furniture industry for 17 years and did not know at the time that their clients would respond in such a tremendous way. "Our customers are very educated in our products and specifically ask for the brands we carry," Hughes remarked.  "We consider our store a destination to enhance one's outdoor lifestyle." With The Patio Place being a locally owned business, their clients know that they will be there for their every need unlike the national chains.</p>
+      <p>When the cushion needs replacing, there isn't anyone to guide or educate you in the cleaning process when you deal with online or national level companies.  Barbara suggest going with a Sunbrella solid colored faric for two reasons, they will not fade and you can always jazz your look up by simply adding fun pillows. Barbara loves to sit with a client and get to know them and their style.  All of their customers are thrilled with the end result once their funriture has been delivered and instaled.  The Patio Place plans on serving the Lowcountry with quality service and products for yeats to come. </p>
+      <p>For more information call The Patio Place is located at 48 W. Montgomery Crossroads or you can reach them via phone at 912.961.9707.</p>
+      <p>- Savannah's Home Improvement Guide Fall 2009</p>
+    </patio-tip-overlay>
+  </template>
+
+  <script>
+    class TppPatioTips extends Polymer.Element {
+      static get is() { return 'tpp-patio-tips'; }
+      _showTipOneOverlay() {
+        this.$["tip-one-overlay"].open();
+        // this.$["tip-one-overlay"].playAnimation('entry');
+      }
+      _showTipTwoOverlay() {
+        this.$["tip-two-overlay"].open();
+        // this.$["tip-two-overlay"].playAnimation('entry');
+      }
+      _showTipThreeOverlay() {
+        this.$["tip-three-overlay"].open();
+        // this.$["tip-three-overlay"].playAnimation('entry');
+      }
+      _showTipFourOverlay() {
+        this.$["tip-four-overlay"].open();
+        // this.$["tip-four-overlay"].playAnimation('entry');
+      }
+      _showTipFiveOverlay() {
+        this.$["tip-five-overlay"].open();
+        // this.$["tip-five-overlay"].playAnimation('entry');
+      }
+      _showTipSixOverlay() {
+        this.$["tip-six-overlay"].open();
+        // this.$["tip-six-overlay"].playAnimation('entry');
+      }
+      _showTipSevenOverlay() {
+        this.$["tip-seven-overlay"].open();
+        // this.$["tip-seven-overlay"].playAnimation('entry');
+      }
+      _showTipEightOverlay() {
+        this.$["tip-eight-overlay"].open();
+        // this.$["tip-eight-overlay"].playAnimation('entry');
+      }
+    }
+
+    window.customElements.define(TppPatioTips.is, TppPatioTips);
+  </script>
+</dom-module>

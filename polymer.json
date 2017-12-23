@@ -1,0 +1,28 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/my-app.html",
+  "fragments": [
+    "src/tpp-home.html",
+    "src/tpp-products.html",
+    "src/tpp-vendor.html",
+    "src/tpp-patio-tips.html",
+    "src/patio-tip-overlay.html",
+    "src/tpp-view404.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+  "extraDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/*.js"
+  ],
+  "builds": [
+    { "preset": "es5-bundled" },
+    { "preset": "es6-bundled" }
+  ],
+  "lint": {
+    "rules": ["polymer-2"]
+  }
+}

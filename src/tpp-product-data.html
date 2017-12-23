@@ -1,0 +1,90 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="tpp-product-data">
+  <template>
+    
+    <iron-ajax id="ajax" url="../src/data/products-new.json" handle-as="json" last-response="{{ajaxResponse}}" auto></iron-ajax>
+
+  </template>
+
+  <script>
+    class TppProductData extends Polymer.Element {
+      static get is() { return 'tpp-product-data'; }
+      static get properties() {
+        return {
+          vendorName: {
+            type: String,
+            notify: true
+          },
+          collectionName: {
+            type: String,
+            notify: true
+          },
+          vendorList: {
+            type: Array,
+            notify: true
+          },
+          collectionList: {
+            type: Array,
+            notify: true
+          },
+          vendor: {
+            type: Object,
+            computed: '_computeVendor(vendorName)',
+            notify: true
+          },
+          collection: {
+            type: Object,
+            computed: '_computeCollection(collectionName)'
+          }
+        }
+      }
+      static get observers() {
+        return [
+          '_onDataReceived(ajaxResponse)'
+        ]
+      }
+      _onDataReceived() {
+        this.vendorList = this.ajaxResponse;
+      }
+      _getVendorObject(vendorName) {
+        for(var i = 0, v; v = this.vendorList[i]; ++i) {
+          if(v.name === vendorName) {
+            return v;
+          }
+        }
+        return null;
+      }
+      _getCollectionObject(collectionName) {
+        for(var i = 0, c; c = this.collectionList[i]; ++i) {
+          if(c.name === collectionName) {
+            return c;
+          }
+        }
+        return null;
+      }
+      _computeVendor() {
+        var vendorObj = this._getVendorObject(this.vendorName);
+        return vendorObj;
+      }
+      _computeCollection() {
+        var collectionObj = this._getCollectionObject(this.collectionName);
+        return collectionObj;
+      }
+    }
+
+    window.customElements.define(TppProductData.is, TppProductData);
+  </script>
+</dom-module>

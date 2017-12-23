@@ -1,0 +1,134 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../bower_components/iron-fit-behavior/iron-fit-behavior.html">
+<link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="design-overlay">
+  <template>
+    <style include="shared-styles">
+      :host {
+        z-index: 1500;
+        padding: 24px;
+        width: 60%;
+        background: #fff;
+        /*box-shadow: 0 6px 10px 0 rgba(33, 104, 155, 0.14), 0 1px 18px 0 rgba(33, 104, 155, 0.12), 0 3px 5px -1px rgba(33, 104, 155, 0.4);*/
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
+      }
+      .container {
+        position: relative;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        -webkit-transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      }
+      .top .header {
+        font-size: 40px;
+        text-transform: uppercase;
+        margin: 0 8px;
+        color: var(--app-primary-color);
+        transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        -webkit-transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      }
+      .details {
+        padding: 16px;
+        transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        -webkit-transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      }
+      .details paper-button {
+        background-color: var(--app-secondary-color);
+        color: #fff;
+        float: right;
+      }
+      #btn-close {
+        float: right;
+        --paper-icon-button-ink-color: #000;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      @media only screen and (max-width: 480px) { /* Phone */
+        :host {
+          width: 95%;
+        }
+        .top .header {
+          font-size: 20px;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <paper-icon-button id="btn-close" icon="mdi:close" on-tap="_closeOverlay"></paper-icon-button>
+      <div class="top">
+        <p class="header">[[header]]</p>
+      </div>
+      <div class="details">
+        <form is="iron-form" id="design-form" method="post" action="">
+          <paper-input name="fname" label="First Name" autocomplete="fname" error-message="Please enter letters only" auto-validate required></paper-input>
+          <paper-input name="lname" label="Last Name" autocomplete="lname" error-message="Please enter letters only" auto-validate required></paper-input>
+          <paper-input name="email" label="Email" autocomplete="email" type="email" error-message="Please enter a correct email" auto-validate required></paper-input>
+          <paper-input name="number" label="Phone Number" autocomplete="tel" type="tel" error-message="Enter a 10-digit number" auto-validate required></paper-input>
+          <paper-dropdown-menu label="Preferred Method of Contact" name="preferred">
+            <paper-listbox class="dropdown-content">
+              <paper-item value="phone">Phone</paper-item>
+              <paper-item value="text">Text</paper-item>
+              <paper-item value="email">Email</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu>
+          <br><br>
+          <paper-button class="btn-square" raised on-tap="_submitForm">Submit</paper-button>
+        </form>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class DesignOverlay extends Polymer.mixinBehaviors([Polymer.IronOverlayBehavior, Polymer.IronFitBehavior, Polymer.IronResizableBehavior], Polymer.Element) {
+      static get is() { return 'design-overlay'; }
+      static get properties() {
+        return {
+          header: String,
+          noCancelOnOutsideClick: {
+            type:Boolean,
+            value: true
+          }
+        }
+      }
+      _closeOverlay() {
+        this.close();
+      }
+      _submitForm() {
+        var form = this.$["design-form"];
+        form.submit();
+        if(form.validate()) {
+          this._closeOverlay();
+          form.reset();
+        }
+      }
+    }
+
+    window.customElements.define(DesignOverlay.is, DesignOverlay);
+  </script>
+</dom-module>

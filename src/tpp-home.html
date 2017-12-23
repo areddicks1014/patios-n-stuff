@@ -1,0 +1,521 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animatable-behavior.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../bower_components/iron-fit-behavior/iron-fit-behavior.html">
+<link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="image-banner.html">
+<link rel="import" href="cta-banner.html">
+<link rel="import" href="sale-overlay.html">
+<link rel="import" href="design-overlay.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="tpp-home">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        color: rgba(0, 0, 0, 0.87);
+      }
+      .first-sales-banner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background: var(--app-primary-color);
+        margin: 8px;
+        padding: 4px;
+      }
+      .first-sales-banner paper-button {
+        background-color: var(--app-secondary-color);
+      }
+      .second-sales-banner {
+         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background: var(--app-secondary-color);
+        margin: 8px;
+        padding: 4px;
+      }
+      .first-sales-banner h3, .second-sales-banner h3 {
+        margin: 0;
+      }
+      .second-sales-banner paper-button {
+        background-color: var(--app-primary-color);
+      }
+      .home-header {
+        width: 100%;
+        z-index: 200;
+        position: relative;
+        color: #fff;
+      }
+      .policy {
+        font-size: 0.8em;
+      }
+      .design-card {
+        padding: 0;
+      }
+      .design-section .top {
+        color: var(--app-primary-color);
+        padding: 16px;
+        margin-top: 32px;
+      }
+      .design-section .top.alt {
+        background-color: var(--app-secondary-color);
+      }
+      .design-section .bottom {
+        padding: 16px;
+      }
+      .design-section .bottom paper-button {
+        background-color: var(--app-secondary-color);
+        color: #fff;
+      }
+      .design-section .bottom .text {
+        margin: 16px auto;
+        max-width: 800px;
+      }
+      .design-section {
+        position: relative;
+        border-radius: 500px/75px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        background: #fff;
+        border-top: solid 15px var(--app-secondary-color);
+        width: 100%;
+        text-align: center;
+        margin-top: -100px;
+        z-index: 300;
+      }
+      .about-section {
+        position: relative;
+        border-radius: 500px/75px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        background: var(--app-primary-color);
+        border-top: solid 15px var(--app-primary-color);
+        width: 100%;
+        margin-top: -105px;
+        z-index: 325;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
+      }
+      .about-section .left {
+        background-color: var(--app-primary-color);
+        color: #fff;
+        flex: 1;
+        padding: 75px 0;
+        font-size: 1.1em;
+      }
+      .about-section .left p {
+        padding: 16px;
+      }
+      .about-section .right {
+        background-color: #fff;
+        color: var(--app-primary-color);
+        flex: 1;
+      }
+      .contact-info {
+        color: var(--app-primary-color);
+        flex: 1;
+        padding: 16px;
+      }
+      .contact-info a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .contact-info p {
+        margin: 4px auto;
+      }
+      .contact-icon {
+        margin: 8px;
+        padding: 8px;
+        background-color: var(--app-primary-color);
+        border-radius: 50%;
+        color: #fff;
+        transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        -webkit-transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      }
+      .contact-icon:hover {
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
+      }
+      .map {
+        flex: 1;
+        height: 200px;
+      }
+      .featured-section {
+        position: relative;
+        border-radius: 500px/75px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        background: var(--app-primary-color);
+        border-top: solid 15px var(--app-primary-color);
+        width: 100%;
+        margin-top: -105px;
+        z-index: 325;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
+      }
+      .featured-section a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .featured-section .left {
+        background-color: #fff;
+        color: var(--app-primary-color);
+        flex: 1;
+        padding: 75px 16px;
+        font-size: 1.1em;
+      }
+      .featured-section .left paper-button {
+        background-color: var(--app-primary-color);
+        color: #fff;
+      }
+      .featured-section .right {
+        background-color: var(--app-primary-color);
+        color: #fff;
+        flex: 1;
+        padding: 75px 16px;
+        font-size: 1.1em;
+      }
+      .featured-section .right paper-button {
+        background-color: #fff;
+        color: var(--app-primary-color);
+      }
+      .brands-section .top {
+        color: var(--app-primary-color);
+        padding: 16px;
+        padding-top: 32px;
+      }
+      .brands-section .top.alt {
+        background-color: var(--app-secondary-color);
+      }
+      .brands-section .bottom {
+        padding: 16px;
+      }
+      .brands-section .bottom paper-button {
+        background-color: var(--app-secondary-color);
+        color: #fff;
+      }
+      .brands-section .bottom .text {
+        margin: 16px auto;
+        max-width: 800px;
+      }
+      .brands-section {
+        position: relative;
+        background: #fff;
+        width: 100%;
+        text-align: center;
+        z-index: 300;
+        /*box-shadow: 0 -6px 10px 0 rgba(0, 0, 0, 0.14), 0 -1px 18px 0 rgba(0, 0, 0, 0.12), 0 -3px 5px -1px rgba(0, 0, 0, 0.4);*/
+        box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.14), 0 -1px 5px 0 rgba(0, 0, 0, 0.12), 0 -3px 1px -2px rgba(0, 0, 0, 0.2);
+      }
+      .brands-section .brand-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .brands-section .brand-grid a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .brands-section .brand-grid a:hover {
+        opacity: 0.6;
+      }
+      .curve-spacer {
+        height: 140px;
+        width: 100%;
+        background-color: #fff;
+      }
+      .horizontal-divide {
+        width: 80%;
+        height: 2px;
+        margin: 16px auto;
+        background: #fff;
+      }
+      .horizontal-divide-alt {
+      width: 80%;
+      height: 2px;
+      margin: 16px auto;
+      background: var(--app-primary-color);
+      }
+      .accent-text {
+        color: var(--text-secondary-color);
+        font-weight: bold;
+      }
+      
+      image-banner[show-small] {
+        display: none;
+      }
+      image-banner[show-large] {
+        display: block;
+      }
+      cta-banner h3{
+        font-size: 2.3em;
+        text-shadow: rgba(0, 0, 0, 0.6) 0 2px 1px;
+      }
+      cta-banner paper-button {
+        background-color: var(--app-primary-color);
+        border-radius: 0;
+      }
+      cta-banner paper-button.alt {
+        background-color: var(--app-secondary-color);
+      }
+      cta-banner[show-small] {
+        display: none;
+        height: 250px;
+      }
+      cta-banner[show-large] {
+        display: block;
+        height: 300px;
+      }
+      cta-banner .promo {
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 16px;
+      }
+      paper-button:hover {
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
+      }
+      paper-tooltip {
+        --paper-tooltip-background: var(--app-secondary-color);
+        --paper-tooltip-text-color: #fff;
+      }
+      @media only screen and (max-width: 768px) { /* Tablet */
+        
+        .home-header {
+          background-size: contain !important;
+        }
+        .first-sales-banner , .second-sales-banner {
+          font-size: 0.8em;
+          margin: 4px;
+        }
+        .design-section {
+          border-radius: 250px/50px;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          margin-top: -48px;
+          border-top: solid 8px var(--app-secondary-color);
+        }
+        .design-section h1 {
+          font-size: 1.1em;
+        } 
+        .design-section h2 {
+          font-size: 1em;
+        }
+        .about-section {
+          border-radius: 250px/50px;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          margin-top: -48px;
+          border-top: solid 8px var(--app-primary-color);
+        }
+        .about-section .left {
+          width: 100%;
+          flex: auto;
+          text-align: center;
+        }
+        .about-section .right {
+          width: 100%;
+          flex: auto;
+          font-size: 0.8em;
+        }
+        .about-section h1 {
+          font-size: 1.1em;
+        } 
+        .about-section h2 {
+          font-size: 1em;
+        }
+        .featured-section {
+          border-radius: 250px/50px;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          margin-top: -48px;
+          border-top: solid 8px var(--app-primary-color);
+        }
+        .featured-section .left {
+          width: 100%;
+          flex: auto;
+          text-align: center;
+        }
+        .featured-section .right {
+          width: 100%;
+          flex: auto;
+          text-align: center;
+        }
+        .featured-section h1 {
+          font-size: 1.1em;
+        } 
+        .featured-section h2 {
+          font-size: 1em;
+        }
+        .curve-spacer {
+          height: 90px;
+          width: 100%;
+          background-color: #fff;
+        }
+        .accent-text {
+          margin: auto;
+          width: 80%;
+          font-size: 0.8em;
+        }
+        image-banner[show-small] {
+          display: block;
+        }
+        image-banner[show-large] {
+          display: none;
+        }
+        cta-banner h3{
+         font-size: 1.2em;
+        }
+        cta-banner[show-small] {
+          display: block;
+        }
+        cta-banner[show-large] {
+          display: none;
+        }
+      }
+    </style>
+
+    <image-banner show-small url="[[importPath]]images/header-example-small.jpg" class="home-header center" opacity="0">
+      <!--<h3>SAVE 15% ON PATIO UMBRELLAS | Limited time only</h3><paper-button class="alt" on-tap="_showSaleOverlay"><b>CLAIM NOW ►</b></paper-button>-->
+    </image-banner>
+    <image-banner show-large url="[[importPath]]images/header-example-large.jpg" class="home-header center" opacity="0">
+      <!--<h3>SAVE 15% ON PATIO UMBRELLAS | Limited time only</h3><paper-button class="alt" on-tap="_showSaleOverlay"><b>CLAIM NOW ►</b></paper-button>-->
+    </image-banner>
+    <div class="design-section">
+      <div class="top">
+        <h1 class="center">FREE IN-HOME DESIGN SERVICES</h1>
+      </div>
+      <p class="accent-text">Proudly serving the Savannah, Bluffton, and Hilton Head areas.</p>
+      <div id="design" class="bottom center">
+        <h2>Need Help Getting the Perfect Look for your Home?</h2>
+        <p class="text">Our design experts will work with you to custom design your outdoor living space into a luxurious retreat. If you can't come to Patios-N-Stuff showroom, let us bring Patios-N-Stuff to you. Our design experts bring catalogs, fabric books, frame samples, as well as their 25 years of furniture experience to your home. We can make suggestions and answer any related questions you may have.</p>
+        <paper-button raised on-tap="_showDesignOverlay" class="btn-square">Request An Appointment</paper-button>
+      </div>
+    </div>
+    <div class="curve-spacer"></div>
+    <div class="about-section">
+      <div class="left">
+        <h1 class="center">A LITTLE ABOUT US</h1>
+        <div class="horizontal-divide"></div>
+        <p>Patios-N-Stuff was started with the idea that we focus on selling quality, and design. We pride ourselves on being the best alternative to the other stores that sell only price. We sell great outdoor furniture with many style and color choices, as well as hundreds of fabrics to choose from by offering products from top manufactures such as Lloyd Flanders, Tropitone, Windham Castings, and Woodard. Come see why Patios-N-Stuff is the most comprehensive casual furniture store in the Florida, our on site designer is here to help you build the retreat of your dreams.</p>
+      </div>
+      <div class="right">
+        <div class="map">
+          <google-map latitude="28.4813989" longitude="-81.5088381" fit-to-marker api-key="[[mapKey]]">
+            <google-map-marker latitude="28.4813989" longitude="-81.5088381" title="Patios-N-Stuff" draggable="true"></google-map-marker>
+          </google-map>
+          <!--<img src="https://maps.googleapis.com/maps/api/staticmap?size=360x95&scale=2&center=32.0005295,-81.1259885&zoom=9&maptype=roadmap/&markers=size:mid%7Ccolor:red%7C32.0005295,-81.1259885&key=AIzaSyDFIOL8gfki334Dr4r2Pm0Euq3wxrO9cAc"-->
+        </div>
+        <div class="contact-info">
+          <p><iron-icon icon="mdi:map-marker" class="contact-icon" title="Address"></iron-icon><a href="#" target="_blank">Address</a></p>
+          <p><iron-icon icon="mdi:clock" class="contact-icon" title="Business Hours"></iron-icon>Business Hours</p>
+          <p><iron-icon icon="mdi:phone" class="contact-icon" title="Phone Number"></iron-icon><a href="#">(555)555-5555</a></p>
+          <p><iron-icon icon="mdi:email" class="contact-icon" title="Email"></iron-icon><a href="#">E-mail Address</a></p>
+        </div>
+       </div>
+      </div>
+      <image-banner show-small url="[[importPath]]images/header-example2-small.jpg" class="home-header center" opacity="0">
+        <!--<h3>20% OFF ON OUTDOOR SEATING | Limited time only</h3><paper-button on-tap="_showSaleOverlay"><b>CLAIM NOW ►</b></paper-button>-->
+      </image-banner>
+      <image-banner show-large url="[[importPath]]images/header-example2-large.jpg" class="home-header center" opacity="0">
+        <!--<h3>20% OFF ON OUTDOOR SEATING | Limited time only</h3><paper-button on-tap="_showSaleOverlay"><b>CLAIM NOW ►</b></paper-button>-->
+      </image-banner>
+      <div class="featured-section">
+        <div class="left">
+          <h1 class="center">Tropitone</h1>
+          <div class="horizontal-divide-alt"></div>
+          <p>Since 1954, Tropitone has maintained a tradition of excellence in the design and manufacture of casual indoor and outdoor patio furniture, pool furniture, contract and hospitality furnishings, patio umbrellas, market umbrellas and shade solutions. Tropitone helps you create living solutions for outdoor spaces with outdoor patio furniture designs from gracious traditional looks in highly-detailed cast aluminum to contemporary choices at home in the most modern surroundings. Tropitone delivers the widest section of patio furniture styles, finishes, colors and fabrics.</p>
+          <paper-button class="btn-square"><a href="/vendor/tropitone">View Collections</a></paper-button>
+        </div>
+        <div class="right">
+          <h1 class="center">Lloyd Flanders</h1>
+          <div class="horizontal-divide"></div>
+          <p>The Original All Weather Wicker.</p>
+          <p>Lloyd®/Flanders is proud to carry on the traditions of Marshal B. Lloyd, who developed a timeless and unique process for creating fine woven furniture. It is this dedication that earns them the reputation of creating heirloom furnishings enjoyed by many generations.</p>
+          <paper-button class="btn-square"><a href="/vendor/lloyd-flanders">View Collections</a></paper-button>
+        </div>
+      </div>
+      <cta-banner show-small url="[[importPath]]images/bg_umbrella_pattern_small.jpg" class="home-header center" opacity="0">
+        <div class="promo">
+          <h3>20% OFF SPECIAL ORDER REPLACEMENT CUSHIONS OR SLINGS</h3><paper-button class="alt" raised on-tap="_showSaleOverlay"><b>Learn More</b></paper-button>
+        </div>
+      </cta-banner>
+      <cta-banner show-large url="[[importPath]]images/bg_umbrella_pattern_large.jpg" class="home-header center" opacity="0">
+        <div class="promo">
+          <h3>20% OFF SPECIAL ORDER REPLACEMENT CUSHIONS OR SLINGS</h3><paper-button class="alt" raised on-tap="_showSaleOverlay"><b>Learn More</b></paper-button>
+        </div>
+      </cta-banner>
+      <div class="brands-section">
+        <div class="top">
+          <h1 class="center">OTHER GREAT BRANDS WE CARRY</h1>
+        </div>
+        <p class="accent-text">All include replacement cushions and slings.</p>
+        <div id="brands" class="bottom center">
+          <!--<h2>Classic Cushions supplies specialty size cushions and slings.</h2>-->
+          <div class="brand-grid">
+            <a href="http://www.kingsleybate.com/" target="_blank"><img style="width: 235px;height:37px;" src="[[importPath]]images/brands/KB_Logo_Tagline.jpg"></img><paper-tooltip position="top">Click To Visit Site</paper-tooltip></a>
+            <a href="http://www.treasuregarden.com/" target="_blank"><img style="width: 300px;height:47px;" src="[[importPath]]images/brands/treasure-garden-logo.png"></img><paper-tooltip position="top">Click To Visit Site</paper-tooltip></a>
+            <a href="http://www.windhamcastings.com/" target="_blank"><img style="width: 300px;height:21px;" src="[[importPath]]images/brands/windham-logo-black.gif"></img><paper-tooltip position="top">Click To Visit Site</paper-tooltip></a>
+          </div>
+          <div class="brand-grid">
+            <a href="http://www.windwarddesigngroup.com/" target="_blank"><img style="width: 300px;height:147px;" src="[[importPath]]images/brands/Windward-Logo.png"></img><paper-tooltip position="top">Click To Visit Site</paper-tooltip></a>
+            <a href="http://www.winstonfurniture.com/" target="_blank"><img style="width: 250px;height:61px;" src="[[importPath]]images/brands/WinstonLogo_HighRes.png"></img><paper-tooltip position="top">Click To Visit Site</paper-tooltip></a>
+            <a href="http://www.woodard-furniture.com/" target="_blank"><img style="width: 250px;height:74px;" src="[[importPath]]images/brands/woodard-furniture-logo.png"></img><paper-tooltip position="top">Click To Visit Site</paper-tooltip></a>
+          </div>
+        </div>
+      </div>
+
+      <sale-overlay id="sale-overlay" header="Claim Your Coupon Today!"></sale-overlay>
+      <design-overlay id="design-overlay" header="Request An In-Home Design Appointment"></design-overlay>
+  </template>
+
+  <script>
+    class TppHome extends Polymer.Element {
+      static get is() { return 'tpp-home'; }
+      static get properties() {
+        return {
+          mapKey: {
+            type:String,
+            value: "AIzaSyDFIOL8gfki334Dr4r2Pm0Euq3wxrO9cAc"
+          }
+        }
+      }
+      _showDesignOverlay() {
+        this.$["design-overlay"].open();
+        //this.$["design-overlay"].playAnimation('entry');
+      }
+      _showSaleOverlay() {
+        this.$["sale-overlay"].open();
+        //this.$["design-overlay"].playAnimation('entry');
+      }
+    }
+
+    window.customElements.define(TppHome.is, TppHome);
+  </script>
+</dom-module>

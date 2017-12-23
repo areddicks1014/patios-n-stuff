@@ -1,0 +1,189 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="tpp-vendor">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        color: #424242;
+      }
+      .headerPhotoContent {
+        background-color: #ddd;
+        position: relative;
+        width: auto;
+        height: 250px;
+        overflow: hidden;
+        transition: all cubic-bezier(.4, 0, .2, 1) 325ms;
+      }
+      .headerPhotoContent > iron-image {
+        display: flex;
+      }
+      .headerPhotoContent > .detail {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+        color: white;
+        font-size: 30px;
+        font-weight: 300;
+        padding: 20px;
+        opacity: 1;
+        transition: opacity cubic-bezier(.4, 0, .2, 1) 225ms;
+      }
+      .header-bg-image {
+        height: 250px;
+        background-position: center center;
+      }
+      /* Collection Styles*/
+      .collections {
+        width: auto;
+        margin: 16px auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: space-around;
+      }
+      .photoContent {
+        background-color: #ddd;
+        position: relative;
+        width: 250px;
+        height: 250px;
+        margin: 8px 16px;
+        overflow: hidden;
+        transition: all cubic-bezier(.4, 0, .2, 1) 325ms;
+      }
+      .photoContent:hover {
+        /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);*/
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4);
+      }
+      .photoContent:hover .detail{
+        opacity: 1;
+      }
+      .photoContent > iron-image {
+        display: flex;
+      }
+      .photoContent > .detail {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+        color: white;
+        font-size: 20px;
+        font-weight: 100;
+        padding: 20px;
+        opacity: 1;
+        transition: opacity cubic-bezier(.4, 0, .2, 1) 225ms;
+      }
+      .bg-image {
+        height: 250px;
+        background-position: center center;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      @media only screen and (max-width: 768px) { /* Tablet */
+        .photoContainer {
+          width: calc(50% - 16px);
+        }
+        .photoContent {
+          width: auto;
+        }
+      }
+      @media only screen and (max-width: 480px) { /* Phone */ 
+        .photoContainer{
+          width: 50%;
+          height: 75%;
+        }
+        .bg-image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    </style>
+
+    <app-route
+        route="[[route]]"
+        pattern="/:vendor"
+        data="{{routeData}}"></app-route>
+    
+    <iron-ajax id="ajax2" url="../src/data/products-new2.json" handle-as="json" last-response="{{ajaxResponseTwo}}" auto></iron-ajax>
+    
+    <div id="[[vendor.name]]" class="container">
+      <div class="headerPhotoContainer">
+        <div class="headerPhotoContent" tabindex$="[[tabIndex]]">
+          <iron-image sizing="cover" class="header-bg-image" src="[[vendor.headerImageLarge]]"></iron-image>
+          <div class="detail">[[vendor.title]] Collections</div>
+        </div>
+        <!--<h2>Tropitone Example: [[ajaxResponse.tropitone.title]]</h2>
+        <h2>testVendor: [[testVendor]]</h2>
+        <h2>testResponse: [[testResponse]]</h2>-->
+        <div class="collections">
+          <template is="dom-repeat" items="[[vendor.collections]]" as="collection">
+            <!--<h3>[[collection.name]]</h3>-->
+            <div class="photoContainer">
+              <div class="photoContent" tabindex$="[[tabIndex]]">
+                <iron-image sizing="cover" class="bg-image" src="[[collection.image]]"></iron-image>
+                <div class="detail">[[collection.name]]</div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+
+    </div>
+  </template>
+
+  <script>
+    class TppVendor extends Polymer.Element {
+      static get is() { return 'tpp-vendor'; }
+      static get properties() {
+        return {
+          vendor: Object,
+          testVendor: String,
+          testResponse: Object
+        }
+      }
+      static get observers() {
+        return [
+          '_onDataPopulated(routeData, ajaxResponseTwo)'
+        ]
+      }
+      _onDataPopulated() {
+        this.testVendor = this.routeData.vendor;
+        this.testResponse = this.ajaxResponseTwo;
+        var current = this.routeData.vendor;
+        //this.vendor = this.ajaxResponseTwo.current;
+        // this.vendor = this.ajaxResponseTwo.tropitone;
+        switch(current) {
+          case 'tropitone':
+            this.vendor = this.ajaxResponseTwo.tropitone;
+            break;
+          case 'lloyd-flanders':
+            this.vendor = this.ajaxResponseTwo["lloyd-flanders"];
+            break;
+          default:
+            this.vendor = this.ajaxResponseTwo;
+        }
+      }
+    }
+
+    window.customElements.define(TppVendor.is, TppVendor);
+  </script>
+</dom-module>
