@@ -233,7 +233,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open>
         <div class="drawer-header">
-          <img class="" src="[[importPath]]images/patios-n-stuff-logo-stacked.svg">
+          <img alt="Logo" class="" src="[[importPath]]images/patios-n-stuff-logo-stacked.svg">
         </div>
         <div class="drawer-menu-section">
           <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
@@ -264,7 +264,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <app-toolbar sticky>
             <paper-icon-button class="menu-button" icon="my-icons:menu" drawer-toggle hidden$="{{wideLayout}}"></paper-icon-button>
             <!--<h4 main-title>[The Patio Place Logo]</h4>-->
-            <a href="/home" main-title> <img class="logo-small" src="[[importPath]]images/patios-n-stuff-logo-horizontal.svg"></img></a>
+            <a href="/home" main-title > <img class="logo-small" src="[[importPath]]images/patios-n-stuff-logo-horizontal.svg"></img></a>
             <iron-selector selected="[[page]]" attr-for-selected="name" class="top-nav" role="navigation" hidden$="{{!wideLayout}}">
               <a name="home" href="/home">Home</a>
               <a name="products" href="/products">Products</a>
@@ -315,7 +315,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             type: Boolean,
             value: false,
             observer: 'onLayoutChange',
-          }
+          },
         };
       }
 
